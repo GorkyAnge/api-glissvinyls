@@ -29,6 +29,8 @@ namespace APIProductos.Controllers
             return Ok(productos);
         }
 
+
+
         // GET api/<ProductoController>/5
         [HttpGet("{IdProducto}")]
         public async Task<IActionResult> Get(int IdProducto)

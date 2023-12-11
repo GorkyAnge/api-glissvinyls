@@ -5,7 +5,7 @@
 namespace APIProductos.Migrations
 {
     /// <inheritdoc />
-    public partial class Productos : Migration
+    public partial class API : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -27,10 +27,32 @@ namespace APIProductos.Migrations
                     table.PrimaryKey("PK_Productos", x => x.IdProducto);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Usuarios",
+                columns: table => new
+                {
+                    IdUsuario = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Apellidos = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Correo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Contrasenia = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Rol = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Usuarios", x => x.IdUsuario);
+                });
+
             migrationBuilder.InsertData(
                 table: "Productos",
                 columns: new[] { "IdProducto", "Descripcion", "Imagen", "Nombre", "Precio", "Stock" },
                 values: new object[] { 1, "Desc1", "https://images.ctfassets.net/63bmaubptoky/8e6EHyyhZoA2rEb_gcW_Wqp1UYa-QFOfol6A_hLTDo4/d07539f9788941b43e301c741bc144ce/what-is-software-CA-Capterra-Header.png", "Producto1", 0m, 13 });
+
+            migrationBuilder.InsertData(
+                table: "Usuarios",
+                columns: new[] { "IdUsuario", "Apellidos", "Contrasenia", "Correo", "Nombre", "Rol" },
+                values: new object[] { 1, "Admin", "empanada123", "admin@gmail.com", "Admin", "admin" });
         }
 
         /// <inheritdoc />
@@ -38,6 +60,9 @@ namespace APIProductos.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Productos");
+
+            migrationBuilder.DropTable(
+                name: "Usuarios");
         }
     }
 }

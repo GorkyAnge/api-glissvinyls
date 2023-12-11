@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace APIProductos.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20231127132707_TablaProductos")]
-    partial class TablaProductos
+    [Migration("20231204173125_API")]
+    partial class API
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -63,6 +63,50 @@ namespace APIProductos.Migrations
                             Nombre = "Producto1",
                             Precio = 0m,
                             Stock = 13
+                        });
+                });
+
+            modelBuilder.Entity("APIProductos.Models.Usuario", b =>
+                {
+                    b.Property<int>("IdUsuario")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdUsuario"));
+
+                    b.Property<string>("Apellidos")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Contrasenia")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Correo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Rol")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdUsuario");
+
+                    b.ToTable("Usuarios");
+
+                    b.HasData(
+                        new
+                        {
+                            IdUsuario = 1,
+                            Apellidos = "Admin",
+                            Contrasenia = "empanada123",
+                            Correo = "admin@gmail.com",
+                            Nombre = "Admin",
+                            Rol = "admin"
                         });
                 });
 #pragma warning restore 612, 618

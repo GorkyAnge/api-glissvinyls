@@ -3,6 +3,7 @@ using APIProductos.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace APIProductos.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20231209153402_NuevasTablas")]
+    partial class NuevasTablas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -80,7 +83,12 @@ namespace APIProductos.Migrations
                     b.Property<int>("IdUsuario")
                         .HasColumnType("int");
 
+                    b.Property<int>("ProductoIdProducto")
+                        .HasColumnType("int");
+
                     b.HasKey("IdProductoEnCarrito");
+
+                    b.HasIndex("ProductoIdProducto");
 
                     b.ToTable("ProductosEnCarrito");
                 });
@@ -151,6 +159,17 @@ namespace APIProductos.Migrations
                             Nombre = "Admin",
                             Rol = "admin"
                         });
+                });
+
+            modelBuilder.Entity("APIProductos.Models.ProductoEnCarrito", b =>
+                {
+                    b.HasOne("APIProductos.Models.Producto", "Producto")
+                        .WithMany()
+                        .HasForeignKey("ProductoIdProducto")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Producto");
                 });
 #pragma warning restore 612, 618
         }
