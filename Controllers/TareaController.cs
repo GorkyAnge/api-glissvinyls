@@ -41,10 +41,10 @@ namespace APIProductos.Controllers
 
 
         [HttpGet("{Nombre}/{Estado}")]
-        public async Task<IActionResult> Get(string nombre, string estado)
+        public async Task<IActionResult> Get(string Nombre, string Estado)
         {
             List<Tarea> tareas = await _db.Tareas.ToListAsync();
-            var tareasFiltradas = tareas.Where(t => t.Nombre == nombre && t.Estado == estado).ToList();
+            var tareasFiltradas = tareas.Where(t => t.Nombre == Nombre && t.Estado == Estado).ToList();
             return Ok(tareasFiltradas);
         }
 
