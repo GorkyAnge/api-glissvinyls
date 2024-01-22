@@ -39,6 +39,16 @@ namespace APIProductos.Controllers
             return Ok(productos);
         }
 
-       
+
+        [HttpGet("{Nombre}/{Estado}")]
+        public async Task<IActionResult> Get(string nombre, string estado)
+        {
+            List<Tarea> tareas = await _db.Tareas.ToListAsync();
+            var tareasFiltradas = tareas.Where(t => t.Nombre == nombre && t.Estado == estado).ToList();
+            return Ok(tareasFiltradas);
+        }
+
+
+
     }
 }
