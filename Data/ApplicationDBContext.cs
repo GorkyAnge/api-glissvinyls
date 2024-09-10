@@ -13,7 +13,6 @@ namespace APIProductos.Data
         
         public DbSet<Producto> Productos { get; set; }
 		public DbSet<Usuario> Usuarios { get; set; }
-		//public DbSet<Carrito> Carritos { get; set; }
 		public DbSet<Resena> Resenas { get; set; }
 		public DbSet<ProductoEnCarrito> ProductosEnCarrito { get; set; }
 
